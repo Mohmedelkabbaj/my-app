@@ -124,3 +124,185 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Global animation definitions */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Shadcn/cmdk animation keyframes */
+@keyframes in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes zoom-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes zoom-out {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+}
+
+@keyframes slide-in-from-left {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-in-from-right {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-in-from-top {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-in-from-bottom {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-out-to-left {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes slide-out-to-right {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+
+/* Additional animations for UI effects */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes tabSlide {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Button hover effects applied via Tailwind classes in components */
+@layer components {
+  /* Smooth transition utility */
+  .transition-smooth {
+    @apply transition-all duration-300 ease-in-out;
+  }
+
+  /* Button animation effects */
+  .btn-hover-effect {
+    @apply hover:scale-105 hover:shadow-lg transition-all duration-200;
+  }
+
+  .btn-press-effect {
+    @apply active:scale-95 transition-transform duration-100;
+  }
+
+  /* Animation utilities */
+  .animate-slide-in {
+    animation: slideIn 0.3s ease-out;
+  }
+
+  .animate-tab-slide {
+    animation: tabSlide 0.4s ease-out;
+  }
+
+  .fade-in {
+    animation: fadeIn 0.3s ease-out;
+  }
+}
+
+@theme {
+  --animate-in: in 0.5s ease-out;
+  --animate-out: out 0.5s ease-in;
+  --animate-zoom-in: zoom-in 0.5s ease-out;
+  --animate-zoom-out: zoom-out 0.5s ease-in;
+  --animate-slide-in-from-left: slide-in-from-left 0.5s ease-out;
+  --animate-slide-in-from-right: slide-in-from-right 0.5s ease-out;
+  --animate-slide-in-from-top: slide-in-from-top 0.5s ease-out;
+  --animate-slide-in-from-bottom: slide-in-from-bottom 0.5s ease-out;
+  --animate-slide-out-to-left: slide-out-to-left 0.5s ease-in;
+  --animate-slide-out-to-right: slide-out-to-right 0.5s ease-in;
+}

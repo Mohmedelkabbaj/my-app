@@ -1,6 +1,7 @@
 "use client"
 
-import { Bell, LogOut, Menu } from "lucide-react"
+import { Bell, LogOut, Menu, Moon, Sun } from "lucide-react"
+import { useTheme } from "@/components/providers/theme-provider"
 
 interface HeaderProps {
   onLogout: () => void
@@ -8,6 +9,7 @@ interface HeaderProps {
 }
 
 export function Header({ onLogout, onToggleSidebar }: HeaderProps) {
+  const { theme, toggleTheme } = useTheme()
   return (
     <header className="bg-card border-b border-border px-6 py-4 flex items-center justify-between">
       <div className="flex items-center gap-4">
@@ -18,6 +20,18 @@ export function Header({ onLogout, onToggleSidebar }: HeaderProps) {
       </div>
 
       <div className="flex items-center gap-4">
+        <button 
+          onClick={toggleTheme}
+          className="p-2 hover:bg-secondary rounded-lg transition-colors"
+          title={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
+        >
+          {theme === "light" ? (
+            <Moon size={20} className="text-foreground" />
+          ) : (
+            <Sun size={20} className="text-foreground" />
+          )}
+        </button>
+
         <button className="p-2 hover:bg-secondary rounded-lg transition-colors relative">
           <Bell size={20} className="text-foreground" />
           <span className="absolute top-1 right-1 w-2 h-2 bg-destructive rounded-full" />

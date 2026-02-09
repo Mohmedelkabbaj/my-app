@@ -2,23 +2,29 @@
 
 import type React from "react"
 import { cn } from "@/lib/utils"
-import { CreditCard, Banknote, Wallet, Truck } from "lucide-react"
+import { CreditCard, Banknote, Wallet, Truck, Building2, Smartphone } from "lucide-react"
+import type { PaymentMethodType } from "@/lib/payment-methods"
 
 interface PaymentMethodCardProps {
   id: string
-  type: "card" | "bank" | "wallet" | "cod"
+  type: PaymentMethodType
   label: string
   description?: string
   isSelected?: boolean
   onSelect?: (id: string) => void
   details?: React.ReactNode
+  icon?: string
 }
 
-const icons = {
+const iconMap: Record<PaymentMethodType, React.ComponentType<{ size: number }>> = {
   card: CreditCard,
   bank: Banknote,
   wallet: Wallet,
   cod: Truck,
+  "app-balance": Wallet,
+  "cash-plus": Building2,
+  "cih-bank": Banknote,
+  "attijariwafa-bank": Banknote,
 }
 
 export function PaymentMethodCard({
@@ -30,7 +36,7 @@ export function PaymentMethodCard({
   onSelect,
   details,
 }: PaymentMethodCardProps) {
-  const Icon = icons[type]
+  const Icon = iconMap[type]
 
   return (
     <button

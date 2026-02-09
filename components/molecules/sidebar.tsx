@@ -1,6 +1,6 @@
 "use client"
 
-import { Wallet, CreditCard, History, Settings, LogOut, Menu, X } from "lucide-react"
+import { Wallet, CreditCard, History, Settings, LogOut, Menu, X, Users } from "lucide-react"
 
 interface SidebarProps {
   isOpen: boolean
@@ -14,6 +14,7 @@ export function Sidebar({ isOpen, currentPage, onPageChange, onToggle }: Sidebar
     { id: "dashboard", label: "Dashboard", icon: Wallet },
     { id: "methods", label: "Payment Methods", icon: CreditCard },
     { id: "history", label: "Transaction History", icon: History },
+    { id: "persons", label: "Person Management", icon: Users },
     { id: "profile", label: "Profile", icon: Settings },
   ]
 

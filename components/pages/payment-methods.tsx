@@ -6,56 +6,29 @@ import { Card } from "@/components/ui/card"
 import { Button } from "@/components/atoms/button"
 import { PaymentMethodCard } from "@/components/molecules/payment-method-card"
 import { Plus, Edit2, Trash2 } from "lucide-react"
+import { getAvailableMethods } from "@/lib/payment-methods"
 
 interface PaymentMethodsProps {
   onNavigate: (page: string) => void
 }
 
-interface PaymentMethod {
-  id: string
-  type: "card" | "bank" | "wallet" | "cod"
-  label: string
-  description: string
-  details: React.ReactNode
-}
+// Get available payment methods from configuration
+// This can easily be swapped for an API call: const mockMethods = await fetch('/api/payment-methods')
+const availableMethods = getAvailableMethods()
 
-const mockMethods: PaymentMethod[] = [
-  {
-    id: "card-1",
-    type: "card",
-    label: "Debit Card",
-    description: "Visa Card",
-    details: <span className="text-sm">**** **** **** 4444</span>,
-  },
-  {
-    id: "bank-1",
-    type: "bank",
-    label: "Bank Transfer",
-    description: "Direct bank account",
-    details: <span className="text-sm">IBAN: MA1122334455667788990011</span>,
-  },
-  {
-    id: "wallet-1",
-    type: "wallet",
-    label: "Mobile Wallet",
-    description: "Inwi Money / Orange Money",
-    details: <span className="text-sm">+212 11111111</span>,
-  },
-  {
-    id: "cod-1",
-    type: "cod",
-    label: "Cash on Delivery",
-    description: "Pay when you receive",
-    details: <span className="text-sm">Street X, City Y</span>,
-  },
-  {
-    id: "balance-1",
-    type: "wallet",
-    label: "App Balance",
-    description: "In-app wallet",
-    details: <span className="text-sm font-semibold text-green-600">520.00 MAD</span>,
-  },
-]
+// Mock methods for display - uses all available payment methods from config
+const mockMethods = availableMethods.map((method) => ({
+  id: method.id,
+  type: method.type,
+  label: method.label,
+  description: method.description,
+  details: (
+    <div className="flex items-center gap-2">
+      <span className="text-lg">{method.icon}</span>
+      <span className="text-sm text-muted-foreground">{method.description}</span>
+    </div>
+  ),
+}))
 
 export function PaymentMethods({ onNavigate }: PaymentMethodsProps) {
   const [selectedMethod, setSelectedMethod] = useState<string | null>(null)
@@ -107,7 +80,7 @@ export function PaymentMethods({ onNavigate }: PaymentMethodsProps) {
 
       {/* Payment Methods Info */}
       <Card className="p-6 bg-primary/5 border-primary/20">
-        <h3 className="font-bold text-foreground mb-3">Supported Payment Methods</h3>
+        <h3 className="font-bold text-foreground mb-3">Supported Payment Methods in Morocco</h3>
         <ul className="space-y-2 text-sm text-muted-foreground">
           <li className="flex gap-2">
             <span className="text-primary">✓</span>
@@ -118,7 +91,7 @@ export function PaymentMethods({ onNavigate }: PaymentMethodsProps) {
           <li className="flex gap-2">
             <span className="text-primary">✓</span>
             <span>
-              <strong>Bank Transfer:</strong> IBAN (MA1122334455667788990011)
+              <strong>Bank Transfer (Virement bancaire):</strong> Direct IBAN transfer (MA1122334455667788990011)
             </span>
           </li>
           <li className="flex gap-2">
@@ -130,13 +103,31 @@ export function PaymentMethods({ onNavigate }: PaymentMethodsProps) {
           <li className="flex gap-2">
             <span className="text-primary">✓</span>
             <span>
-              <strong>Cash on Delivery:</strong> Pay upon receipt (Street X, City Y)
+              <strong>Cash Plus:</strong> Moroccan cash payment network - visit any partner location
             </span>
           </li>
           <li className="flex gap-2">
             <span className="text-primary">✓</span>
             <span>
-              <strong>App Balance:</strong> Use your in-app wallet balance
+              <strong>CIH Bank Direct:</strong> Direct transfer from your CIH Bank account
+            </span>
+          </li>
+          <li className="flex gap-2">
+            <span className="text-primary">✓</span>
+            <span>
+              <strong>Attijariwafa Bank Direct:</strong> Direct transfer from your Attijariwafa Bank account
+            </span>
+          </li>
+          <li className="flex gap-2">
+            <span className="text-primary">✓</span>
+            <span>
+              <strong>Cash on Delivery:</strong> Pay upon receipt at your delivery address
+            </span>
+          </li>
+          <li className="flex gap-2">
+            <span className="text-primary">✓</span>
+            <span>
+              <strong>App Balance:</strong> Use your in-app wallet balance for instant payments
             </span>
           </li>
         </ul>

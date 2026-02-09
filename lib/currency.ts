@@ -1,3 +1,7 @@
+/**
+ * Format amount in Moroccan Dirham (MAD)
+ * Supports both English (120.00 MAD) and French (120,00 MAD) formatting
+ */
 export function formatCurrency(amount: number, locale: "en" | "fr" = "en"): string {
   return new Intl.NumberFormat(locale === "fr" ? "fr-MA" : "en-MA", {
     style: "currency",
